@@ -2,6 +2,7 @@
  
 //1. Задача про обчислення різниці часу
 
+
 function durationBetweenDates(start_date = '01 Jan 2000', end_date = '01 Jan 2023', unit = 'days') {
     
     const startDate = new Date(start_date);
@@ -29,6 +30,32 @@ function durationBetweenDates(start_date = '01 Jan 2000', end_date = '01 Jan 202
 // Приклади
 console.log(durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds'));
 console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')); 
+
+
+  function durationBetweenDates(startDate, endDate) {
+    startDate = new Date('02 Aug 1985');
+    endDate = new Date('03 Aug 1985');
+    let diffTime = Math.abs(endDate - startDate);
+
+    const diffSeconds = Math.floor(diffTime / 1000);
+  
+    console.log(diffSeconds + ' seconds');
+}
+
+durationBetweenDates('02 Aug 1985', '03 Aug 1985');
+
+
+
+function durationBetweenDates2(date1, date2) {
+    date1 = new Date('01/31/2022');
+    date2 = new Date('02/03/2021');
+
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    console.log(diffDays + " days");
+  }
+
+  durationBetweenDates2 ('Jan 31 2022','Fab 03 2021' );
 
 
   
