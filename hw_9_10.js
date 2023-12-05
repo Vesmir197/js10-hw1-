@@ -1,30 +1,25 @@
 'use strict';
 
+const toggleButton = document.getElementById('toggleButton');
 
-    const toggleButton = document.getElementById('toggleButton');
+const savedState = getSavedState();
+const initialState = setInitialState(savedState);
+updateUI(initialState);
 
-    const savedState = getSavedState();
+toggleButton.addEventListener('click', function () {
+    const currentState = toggleButton.textContent.toLowerCase();
+    const newState = handleClick(currentState);
+    updateUI(newState);
 
-    const initialState = setInitialState(savedState);
-
-    updateUI(initialState);
-
-    toggleButton.addEventListener('click', function () {
-        const currentState = toggleButton.textContent.toLowerCase();
-        const newState = handleClick(currentState);
-        updateUI(newState);
-
-        localStorage.setItem('buttonState', newState);
-    });
-;
+    localStorage.setItem('buttonState', newState);
+});
 
 function getSavedState() {
     return localStorage.getItem('buttonState');
-    //
 }
 
 function setInitialState(savedState) {
-    return savedState === 'on' ? 'on' : 'off';
+    return savedState === 'on';
 }
 
 function handleClick(currentState) {
@@ -35,15 +30,15 @@ function updateUI(state) {
     const toggleButton = document.getElementById('toggleButton');
     const message = document.querySelector('.message');
 
-    toggleButton.textContent = state === 'on' ? 'Turn on' : 'Turn off';
-    document.body.style.backgroundColor = state === 'on' ? 'darkgray' : 'white';
+    toggleButton.textContent = state ? 'Turn on' : 'Turn off';
+    document.body.style.backgroundColor = state ? 'darkgray' : 'white';
 
-    if (state === 'on') {
-        const lastTurnOffTime = localStorage.getItem('lastTurnOffTime');
-        message.textContent = `Last turn off: ${lastTurnOffTime || 'N/A'}`;
+    if (state) {
+        const lastTurnOnTime = localStorage.getItem('lastTurnOffTime') || 'N/A';
+        message.textContent = `Last turn on: ${lastTurnOnTime}`;
     } else {
         const currentTime = new Date().toLocaleString();
-        message.textContent = `Last turn on: ${currentTime}`;
+        message.textContent = `Last turn off: ${currentTime}`;
         localStorage.setItem('lastTurnOffTime', currentTime);
     }
 }
