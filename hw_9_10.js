@@ -1,44 +1,37 @@
 'use strict';
 
 const toggleButton = document.getElementById('toggleButton');
+const message = document.querySelector('.message');
 
-const savedState = getSavedState();
-const initialState = setInitialState(savedState);
+const savedState = localStorage.getItem('buttonState');
+const initialState = savedState === 'on';
 updateUI(initialState);
 
 toggleButton.addEventListener('click', function () {
-    const currentState = toggleButton.textContent.toLowerCase();
-    const newState = handleClick(currentState);
+    const newState = handleClick();
     updateUI(newState);
 
-    localStorage.setItem('buttonState', newState);
+    localStorage.setItem('buttonState', newState ? 'on' : 'off');
 });
 
-function getSavedState() {
-    return localStorage.getItem('buttonState');
-}
-
-function setInitialState(savedState) {
-    return savedState === 'on';
-}
-
-function handleClick(currentState) {
-    return currentState === 'turn off' ? 'on' : 'off';
+function handleClick() {
+    return !getSavedState();
 }
 
 function updateUI(state) {
-    const toggleButton = document.getElementById('toggleButton');
-    const message = document.querySelector('.message');
-
-    toggleButton.textContent = state ? 'Turn on' : 'Turn off';
+    toggleButton.textContent = state ? 'Turn off' : 'Turn on';
     document.body.style.backgroundColor = state ? 'darkgray' : 'white';
 
+    const currentTime = new Date().toLocaleString();
     if (state) {
-        const lastTurnOnTime = localStorage.getItem('lastTurnOffTime') || 'N/A';
-        message.textContent = `Last turn on: ${lastTurnOnTime}`;
+        const lastTurnOffTime = localStorage.getItem('lastTurnOffTime') || 'N/A';
+        message.textContent = `Last turn on: ${lastTurnOffTime}`;
     } else {
-        const currentTime = new Date().toLocaleString();
         message.textContent = `Last turn off: ${currentTime}`;
         localStorage.setItem('lastTurnOffTime', currentTime);
     }
 }
+
+function getSavedState() {
+    return localStorage.getItem('buttonState') === 'on';
+};
