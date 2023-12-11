@@ -10,8 +10,11 @@ updateUI(initialState);
 toggleButton.addEventListener('click', function () {
     const newState = handleClick();
     updateUI(newState);
-
     localStorage.setItem('buttonState', newState ? 'on' : 'off');
+    if (!newState) {
+        const currentTime = new Date().toLocaleString();
+        localStorage.setItem('lastTurnOffTime', currentTime);
+    }
 });
 
 function handleClick() {
@@ -28,10 +31,9 @@ function updateUI(state) {
         message.textContent = `Last turn on: ${lastTurnOffTime}`;
     } else {
         message.textContent = `Last turn off: ${currentTime}`;
-        localStorage.setItem('lastTurnOffTime', currentTime);
     }
 }
 
 function getSavedState() {
     return localStorage.getItem('buttonState') === 'on';
-};
+}
