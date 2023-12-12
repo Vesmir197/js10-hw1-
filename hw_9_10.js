@@ -9,12 +9,16 @@ updateUI(initialState);
 
 toggleButton.addEventListener('click', function () {
     const newState = handleClick();
-    updateUI(newState);
-    localStorage.setItem('buttonState', newState ? 'on' : 'off');
-    if (!newState) {
-        const currentTime = new Date().toLocaleString();
+    const currentTime = new Date().toLocaleString();
+
+    if (newState) {
+        localStorage.setItem('lastTurnOnTime', currentTime);
+    } else {
         localStorage.setItem('lastTurnOffTime', currentTime);
     }
+
+    localStorage.setItem('buttonState', newState ? 'on' : 'off');
+    updateUI(newState);
 });
 
 function handleClick() {
@@ -25,15 +29,20 @@ function updateUI(state) {
     toggleButton.textContent = state ? 'Turn off' : 'Turn on';
     document.body.style.backgroundColor = state ? 'darkgray' : 'white';
 
-    const currentTime = new Date().toLocaleString();
+    const lastTurnOnTime = localStorage.getItem('lastTurnOnTime') || 'N/A';
+    const lastTurnOffTime = localStorage.getItem('lastTurnOffTime') || 'N/A';
+
     if (state) {
-        const lastTurnOffTime = localStorage.getItem('lastTurnOffTime') || 'N/A';
-        message.textContent = `Last turn on: ${lastTurnOffTime}`;
+        message.textContent = `Last turn on: ${lastTurnOnTime}`;
     } else {
-        message.textContent = `Last turn off: ${currentTime}`;
+        //Перевіряю, чи lastTurnOffTime не є 'N/A' перед оновленням повідомлення
+        message.textContent = lastTurnOffTime !== 'N/A' ? `Last turn off: ${lastTurnOffTime}` : '';
     }
 }
 
 function getSavedState() {
     return localStorage.getItem('buttonState') === 'on';
 }
+
+localStorage.clear();
+
