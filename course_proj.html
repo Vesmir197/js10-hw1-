@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="./course_proj.css">
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tabs"> 
+            <button id="tab1" class="tab-btn">Date Range</button>
+            <button id="tab2" class="tab-btn">Holiday Info</button>
+        </div>
+    
+        <div id="content-tab1" class="date-tab-content">
+            <!-- Date tab content -->
+            <input type="date" id="start-date"/>
+            <input type="date" id="end-date"/>
+            <div id="duration-output" class="duration-output"></div>
+
+            <div id="date-unit-buttons">
+                <button id="days-button">Days</button>
+                <button id="hours-button">Hours</button>
+                <button id="minutes-button">Minutes</button>
+                <button id="seconds-button">Seconds</button>
+            </div>
+            
+            <div class="preset-buttons-container">
+                 <button id="day-preset-button" class="preset-button">Week(7 days)</button>
+                 <button id="month-preset-button" class="preset-button">Month(30 days)</button>
+            </div>
+
+            <div id="day-options-container" class="day-options-container">
+                <input type="radio" id="all-days" name="day-option" value="all" checked>
+                <label for="all-days" class="day-option-label">All Days</label><br>
+                <input type="radio" id="weekdays" name="day-option" value="weekdays">
+                <label for="weekdays" class="day-option-label">Weekdays</label><br>
+                <input type="radio" id="weekends" name="day-option" value="weekends">
+                <label for="weekends" class="day-option-label">Weekends</label>
+            </div>
+
+    
+
+        <!-- Last 10 Calculations Table -->
+    <div id="results-container" class="results-container">
+        <h2 class=" results-header">Last 10 Calculations</h2>
+        <table id="results-table" class="results-table">
+            <thead>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody id="results-body">
+                <!-- Results will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+        <section id="content-tab2" class="holiday-tab-content">
+            <!-- Holiday tab content -->
+        </section>
+    </div>
+
+    <script src="./course_proj.js"></script>
+</body>
+</html>

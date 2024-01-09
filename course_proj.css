@@ -1,0 +1,156 @@
+
+body {
+    display: flex;
+    flex-direction: column; /* Change to column */
+    align-items: center; /* Keep items centered horizontally */
+    justify-content: center; /* Adjust vertical alignment as needed */
+    height: 100vh;
+    margin: 0 auto;
+    background-color: darkslategrey;
+}
+
+.tab-btn {
+width: 100px;
+height: 60px;
+background-color: rgb(134, 192, 134);
+border: 3px;
+border-color: aliceblue;
+border-radius: 2px;
+padding: 10px;
+font-family: sans-serif;
+}
+
+.section-container {
+    margin-top: 10px;
+}
+.tab-btn {
+    margin: 5px;
+}
+.tab-container {
+    text-align: center;
+}
+.tabs {
+    display: flex;
+    flex-direction: row; /* Change from column to row */
+    justify-content: center; /* Center tabs horizontally */
+    align-items: center; /* Align tabs vertically */
+    /* Add any additional styling as needed */
+}
+.date-tab-content{
+    display: block;
+}
+.holiday-tab-content {
+    display: none;
+}
+.date-tab-content, .holiday-tab-content {
+    margin-top: 10px;
+    font-family: sans-serif;
+    color:  rgb(213, 240, 231);
+    font-size: 18px;
+}
+.duration-output {
+     color:  rgb(213, 240, 231);
+     font-family: sans-serif;
+     font-size: 14px;
+}
+
+.unit-button {
+    background-color:  rgb(150, 208, 189);;
+}
+.input-date {
+    background-color:  rgb(150, 208, 189);
+}
+.preset-button {
+    margin-top: 10px;
+    height: 40px;
+    width: 60px;
+    background-color: rgb(71, 146, 121);
+    border: none;
+    border-radius: 2px;
+    font-size: 10px;
+    color: rgb(20, 20, 20);
+}
+.day-options-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: flex-start; /* Align items horizontally to the start */
+    gap: 10px; /* Optional: adds space between items */
+    flex-wrap: wrap; /* Optional: allows items to wrap to the next line if the container is too narrow */
+}
+.day-option-label {
+    color:rgb(188, 232, 217) ;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+input[type="radio"] {
+    appearance: none; /* Or -webkit-appearance: none; for some browsers */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 20px; /* Custom width */
+    height: 20px; /* Custom height */
+    background-color: #f2f2f2; /* Background color */
+    border: 2px solid #d1d1d1; /* Border color */
+    position: relative; /* Position relative for the inner square */
+    cursor: pointer; /* Optional: to change cursor on hover */
+    border-radius: 1px;
+    border: none;
+}
+input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 5px; /* Adjust these values based on the size */
+    left: 5px;
+    width: 10px; /* Adjust size of the inner square */
+    height: 10px;
+    background-color: rgb(78, 80, 79); /* Inner square color */
+    cursor: pointer; /* Optional: to change cursor on hover */
+    border-radius: 1px;
+    border: none;
+}
+input[type="radio"]:hover {
+    background-color: #e7e7e7;
+    border-radius: 1px;
+    border: none;
+}
+.results-container {
+    margin-top: 10px;
+}
+.results-table {
+    border-radius: 2px;
+}
+.results-thead {
+    font-family: sans-serif;
+    color: #96beb8;
+}
+.results-header {
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+.preset-buttons-container {
+    /* ... other styles ... */
+    display: flex; /* Use flexbox */
+    flex-direction: row; /* Arrange children in a row */
+    justify-content: center; /* Center children horizontally */
+    gap: 10px; /* Space between items */
+    margin-top: 0px;
+}
+#results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px; /* Example font size */
+    font-family: sans-serif;
+    background-color: #486963;
+    
+}
+
+#results-table, #results-table th, #results-table td {
+    border: 1px solid #ddd;
+}
+
+#results-table th, #results-table td {
+    padding: 8px;
+    text-align: left;
+}
+
