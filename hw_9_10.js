@@ -1,48 +1,34 @@
 'use strict';
 
-const toggleButton = document.getElementById('toggleButton');
-const message = document.querySelector('.message');
+document.addEventListener('DOMContentLoaded', function () {
+    const button = document.getElementById('toggleButton');
+    const body = document.getElementById('body');
+    const lastToggle = document.getElementById('lastToggle');
+    let isOn = localStorage.getItem('isOn') === 'true';
+    let lastToggleTime = localStorage.getItem('lastToggleTime');
 
-const savedState = localStorage.getItem('buttonState');
-const initialState = savedState === 'on';
-updateUI(initialState);
+    const updateButtonAndBackground = () => {
+        if (isOn) {
+            button.textContent = 'Turned on';
+            body.classList.add('dark');
+            body.classList.remove('light');
+            lastToggle.textContent = 'Last turn off: ' + lastToggleTime;
+        } else {
+            button.textContent = 'Turned off';
+            body.classList.add('light');
+            body.classList.remove('dark');
+            lastToggle.textContent = 'Last turn on: ' + lastToggleTime;
+        }
+    };
 
-toggleButton.addEventListener('click', function () {
-    const newState = handleClick();
-    const currentTime = new Date().toLocaleString();
+    // Initialize
+    updateButtonAndBackground();
 
-    if (newState) {
-        localStorage.setItem('lastTurnOnTime', currentTime);
-    } else {
-        localStorage.setItem('lastTurnOffTime', currentTime);
-    }
-
-    localStorage.setItem('buttonState', newState ? 'on' : 'off');
-    updateUI(newState);
+    button.addEventListener('click', function () {
+        isOn = !isOn;
+        lastToggleTime = new Date().toLocaleString('uk-UA');
+        localStorage.setItem('isOn', isOn);
+        localStorage.setItem('lastToggleTime', lastToggleTime);
+        updateButtonAndBackground();
+    });
 });
-
-function handleClick() {
-    return !getSavedState();
-}
-
-function updateUI(state) {
-    toggleButton.textContent = state ? 'Turn off' : 'Turn on';
-    document.body.style.backgroundColor = state ? 'darkgray' : 'white';
-
-    const lastTurnOnTime = localStorage.getItem('lastTurnOnTime') || 'N/A';
-    const lastTurnOffTime = localStorage.getItem('lastTurnOffTime') || 'N/A';
-
-    if (state) {
-        message.textContent = `Last turn on: ${lastTurnOnTime}`;
-    } else {
-        //Перевіряю, чи lastTurnOffTime не є 'N/A' перед оновленням повідомлення
-        message.textContent = lastTurnOffTime !== 'N/A' ? `Last turn off: ${lastTurnOffTime}` : '';
-    }
-}
-
-function getSavedState() {
-    return localStorage.getItem('buttonState') === 'on';
-}
-
-localStorage.clear();
-

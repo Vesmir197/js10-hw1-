@@ -1,37 +1,41 @@
 body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    margin: 0;
+    margin: 0 auto;
+    transition: background-color 0.5s;
 }
 
-button {
+.dark {
+    background-color: #333;
+    color: white;
+}
+
+.light {
+    background-color: #FFF;
+    color: black;
+}
+
+.toggleButton {
+    margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
-    font-weight: 700;
-    background-color: rgb(223, 103, 23);
-    border-radius: 10px;
-    border-width: 20px;
-    border-color: rgb(5, 5, 5);
-    color: rgb(5, 5, 5);
-
-}
-.dark-mode {
-    background-color: #333; 
-    color: #fff; 
-}
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.message {
-    margin-top: 20px;
-    font-size: 1em;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#someButton {
-    margin-bottom: 10px; 
+.lastToggle {
+    margin: 10px;
 }
+.toggleButton {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border:none;
+    color: rgb(207, 201, 201);
+    background-color: rgb(225, 105, 7);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
