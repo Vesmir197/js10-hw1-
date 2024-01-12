@@ -65,7 +65,12 @@
     
         <section id="content-tab2" class="holiday-tab-content">
             <h1>Holiday Search</h1>
-            <input type="text" id="countryInput" placeholder="Enter Country Code (e.g., US)">
+            <label for="countrySelect">Select Country:</label>
+            <select id="countrySelect"></select>
+        
+            <label for="yearSelect">Select a Year:</label>
+            <select id="yearSelect" disabled></select>
+        
             <button id="searchButton">Search Holidays</button>
             <div id="results"></div>
         </section>

@@ -206,49 +206,23 @@ function getSavedResults() {
     return savedResults ? JSON.parse(savedResults) : [];
 }
 
-// Function to display results
-function displayResults() {
-    const results = getSavedResults();
-    const resultsBody = document.getElementById('results-body');
-    resultsBody.innerHTML = ''; // Clear existing content
-
-    results.forEach(result => {
-        const row = `<tr>
-            <td>${result.startDate}</td>
-            <td>${result.endDate}</td>
-            <td>${result.result}</td>
-        </tr>`;
-        resultsBody.innerHTML += row;
-    });
-}
-
-// Call displayResults when the app loads
-document.addEventListener('DOMContentLoaded', displayResults);
-
-
-
-// Function to make a GET request to a given endpoint
-function fetchCalendarificData(endpoint) {
-    return fetch(`https://calendarific.com/api/v2${endpoint}?api_key=YOUR_API_KEY`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });
-  }
+document.getElementById('searchButton').addEventListener('click', function(event) {
+    event.preventDefault(); // This will prevent the default form submission behavior
   
-  // Fetching data from /holidays
-  fetchCalendarificData('/holidays')
-    .then(data => console.log('Holidays:', data));
+    const countryInput = document.getElementById('countrySelect').value;
+    const resultsDiv = document.getElementById('results');
   
-  // Fetching data from /languages
-  fetchCalendarificData('/languages')
-    .then(data => console.log('Languages:', data));
-  
-  // Fetching data from /countries
-  fetchCalendarificData('/countries')
-    .then(data => console.log('Countries:', data));
+    if (countryInput) {
+      fetchCalendarificData('/holidays', { country: countryInput, year: new Date().getFullYear() })
+        .then(data => {
+          if (data && data.response && data.response.holidays) {
+            const holidays = data.response.holidays.map(holiday => `<li>${holiday.name} (${holiday.date.iso})</li>`).join('');
+            resultsDiv.innerHTML = `<ul>${holidays}</ul>`;
+          } else {
+            resultsDiv.innerHTML = 'No holidays found for the selected country.';
+          }
+        });
+    } else {
+      resultsDiv.innerHTML = 'Please select a country.';
+    }
+  });
