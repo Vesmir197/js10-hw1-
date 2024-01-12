@@ -200,29 +200,73 @@ function saveResult(startDate, endDate, result) {
     localStorage.setItem('searchResults', JSON.stringify(results));
 }
 
-// Function to retrieve saved results
-function getSavedResults() {
-    const savedResults = localStorage.getItem('searchResults');
-    return savedResults ? JSON.parse(savedResults) : [];
+
+
+
+
+function fetchCalendarificData(endpoint, params = {}) {
+    const baseURL = 'https://calendarific.com/api/v2';
+    const url = new URL(`${baseURL}${endpoint}`);
+    url.search = new URLSearchParams({ ...params, api_key: 'W5eEVwyWjZbeHIQpNocUkDZEUAv9Vlid' });
+  
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
 }
 
+function populateCountriesDropdown(countries) {
+    const countrySelect = document.getElementById('countrySelect');
+    countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country['iso-3166'];
+        option.textContent = country.country_name;
+        countrySelect.appendChild(option);
+    });
+
+    document.getElementById('yearSelect').disabled = false;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded and parsed");
+
+    fetchCalendarificData('/countries')
+        .then(data => {
+            if (data && data.response && data.response.countries) {
+                populateCountriesDropdown(data.response.countries);
+            } else {
+                console.error('No countries data found');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching countries:', error);
+        });
+});
+
 document.getElementById('searchButton').addEventListener('click', function(event) {
-    event.preventDefault(); // This will prevent the default form submission behavior
+    event.preventDefault(); 
   
     const countryInput = document.getElementById('countrySelect').value;
+    const yearInput = document.getElementById('yearSelect').value;
     const resultsDiv = document.getElementById('results');
   
-    if (countryInput) {
-      fetchCalendarificData('/holidays', { country: countryInput, year: new Date().getFullYear() })
-        .then(data => {
-          if (data && data.response && data.response.holidays) {
-            const holidays = data.response.holidays.map(holiday => `<li>${holiday.name} (${holiday.date.iso})</li>`).join('');
-            resultsDiv.innerHTML = `<ul>${holidays}</ul>`;
-          } else {
-            resultsDiv.innerHTML = 'No holidays found for the selected country.';
-          }
-        });
+    if (countryInput && yearInput) {
+        fetchCalendarificData('/holidays', { country: countryInput, year: yearInput })
+            .then(data => {
+                if (data && data.response && data.response.holidays) {
+                    const holidays = data.response.holidays.map(holiday => `<li>${holiday.name} (${holiday.date.iso})</li>`).join('');
+                    resultsDiv.innerHTML = `<ul>${holidays}</ul>`;
+                } else {
+                    resultsDiv.innerHTML = 'No holidays found for the selected country and year.';
+                }
+            });
     } else {
-      resultsDiv.innerHTML = 'Please select a country.';
+        resultsDiv.innerHTML = 'Please select a country and a year.';
     }
-  });
+});
