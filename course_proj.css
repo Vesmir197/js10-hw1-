@@ -43,7 +43,7 @@ font-family: sans-serif;
     display: none;
 }
 .date-tab-content, .holiday-tab-content {
-    margin-top: 10px;
+    margin-top: 60px;
     font-family: sans-serif;
     color:  rgb(213, 240, 231);
     font-size: 18px;
@@ -136,6 +136,30 @@ input[type="radio"]:hover {
     gap: 10px; /* Space between items */
     margin-top: 0px;
 }
+
+.tabs {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+/* Margin top for the first content to ensure it doesn't get hidden behind the tabs */
+.tab-container {
+    margin-top: 60px; /* Adjust this value based on the height of your tabs */
+}
+
+/* Scrollable container for holiday results */
+#results {
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto;
+}
+
 #results-table {
     width: 100%;
     border-collapse: collapse;
