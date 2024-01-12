@@ -264,6 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
+
 document.getElementById('searchButton').addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -285,3 +286,4 @@ document.getElementById('searchButton').addEventListener('click', function(event
         resultsDiv.innerHTML = 'Please select a country and a year.';
     }
 });
+
