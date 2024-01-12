@@ -208,17 +208,17 @@ function fetchCalendarificData(endpoint, params = {}) {
     const baseURL = 'https://calendarific.com/api/v2';
     const url = new URL(`${baseURL}${endpoint}`);
     url.search = new URLSearchParams({ ...params, api_key: 'W5eEVwyWjZbeHIQpNocUkDZEUAv9Vlid' });
-  
+
     return fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
 }
 
 function populateCountriesDropdown(countries) {
@@ -230,7 +230,22 @@ function populateCountriesDropdown(countries) {
         countrySelect.appendChild(option);
     });
 
-    document.getElementById('yearSelect').disabled = false;
+    // Enable the year dropdown and populate it
+    populateYearDropdown();
+}
+
+function populateYearDropdown() {
+    const yearSelect = document.getElementById('yearSelect');
+    const currentYear = new Date().getFullYear();
+
+    for (let year = currentYear; year >= 2000; year--) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    }
+
+    yearSelect.disabled = false;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -250,12 +265,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById('searchButton').addEventListener('click', function(event) {
-    event.preventDefault(); 
-  
+    event.preventDefault();
+
     const countryInput = document.getElementById('countrySelect').value;
     const yearInput = document.getElementById('yearSelect').value;
     const resultsDiv = document.getElementById('results');
-  
+
     if (countryInput && yearInput) {
         fetchCalendarificData('/holidays', { country: countryInput, year: yearInput })
             .then(data => {
