@@ -226,3 +226,29 @@ function displayResults() {
 document.addEventListener('DOMContentLoaded', displayResults);
 
 
+
+// Function to make a GET request to a given endpoint
+function fetchCalendarificData(endpoint) {
+    return fetch(`https://calendarific.com/api/v2${endpoint}?api_key=YOUR_API_KEY`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
+  
+  // Fetching data from /holidays
+  fetchCalendarificData('/holidays')
+    .then(data => console.log('Holidays:', data));
+  
+  // Fetching data from /languages
+  fetchCalendarificData('/languages')
+    .then(data => console.log('Languages:', data));
+  
+  // Fetching data from /countries
+  fetchCalendarificData('/countries')
+    .then(data => console.log('Countries:', data));
