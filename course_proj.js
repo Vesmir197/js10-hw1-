@@ -233,16 +233,20 @@ function populateCountriesDropdown(countries) {
     // Enable the year dropdown and populate it
     populateYearDropdown();
 }
-
 function populateYearDropdown() {
     const yearSelect = document.getElementById('yearSelect');
     const currentYear = new Date().getFullYear();
 
-    for (let year = currentYear; year >= 2000; year--) {
+    for (let year = 2001; year <= 2049; year++) {
         const option = document.createElement('option');
         option.value = year;
         option.textContent = year;
         yearSelect.appendChild(option);
+
+        // Встановлюємо поточний рік як значення за замовчуванням
+        if (year === currentYear) {
+            option.selected = true;
+        }
     }
 
     yearSelect.disabled = false;
