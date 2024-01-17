@@ -154,7 +154,7 @@ input[type="radio"]:hover {
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: none;
     width: 100%;
     box-sizing: border-box;
     z-index: 1000;
@@ -217,10 +217,11 @@ input[type="radio"]:hover {
     .tab-container {
         width: 100%;
         padding: 0 10px;
+       
     }
 
     .tabs {
-        margin-top: 15px;
+        margin-top: 30px;
         width: 180px;
         height: 55px;
         flex-direction: column;
@@ -231,10 +232,12 @@ input[type="radio"]:hover {
         margin-top: 10px;
         width: 100%;
         margin-bottom: 10px;
+     
     }
 
     .date-tab-content, .holiday-tab-content {
         width: 100%;
+        margin-top: 110px;
     }
 
     #results-container, #results {
@@ -249,5 +252,15 @@ input[type="radio"]:hover {
 
     /* Adjust other elements as needed for mobile layout */
 }
+.day-options-container {
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Align items vertically in the center */
+    gap: 10px; /* Optional: adds space between items */
+    flex-wrap: wrap; /* Allows items to wrap to the next line if the container is too narrow */
+    /* ... other existing styles ... */
+}
+
+
 
 
