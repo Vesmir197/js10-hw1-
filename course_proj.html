@@ -33,9 +33,11 @@
                  <button id="day-preset-button" class="preset-button">Week(7 days)</button>
                  <button id="month-preset-button" class="preset-button">Month(30 days)</button>
             </div>
+                   
+            <div class="calc-dys"><button class="calc-days-btn">Calculate Days</button></div>
 
             <div id="day-options-container" class="day-options-container">
-                <input type="radio" id="all-days" name="day-option" value="all" checked>
+                <input type="radio" id="all-days" name="day-option" value="all" unchecked>
                 <label for="all-days" class="day-option-label">All Days</label><br>
                 <input type="radio" id="weekdays" name="day-option" value="weekdays">
                 <label for="weekdays" class="day-option-label">Weekdays</label><br>
@@ -63,19 +65,29 @@
     </div>
 </div>
     
-        <section id="content-tab2" class="holiday-tab-content">
-            <h1>Holiday Search</h1>
-            <label for="countrySelect">Select Country:</label>
-            <select id="countrySelect"></select>
-        
-            <label for="yearSelect">Select a Year:</label>
-            <select id="yearSelect" disabled></select>
-        
-            <button id="searchButton">Search Holidays</button>
-            <div id="results"></div>
-        </section>
+<section id="content-tab2" class="holiday-tab-content">
+    <h1>Holiday Search</h1>
+ 
+    <label for="countrySelect">Select Country:</label>
+    <select id="countrySelect"></select>
+
+    <label for="yearSelect">Select a Year:</label>
+    <select id="yearSelect" disabled></select>
+
+    <button id="searchButton">Search Holidays</button>
+
+    <!-- Sorting Dropdown -->
+    <label for="sort-options">Sort By Date:</label>
+    <select id="sort-options">
+        <option value="ascending">Chronological Order</option>
+        <option value="descending">Reverse Chronological Order</option>
+    </select>
+
+    <!-- Results Section -->
+    <div id="results"></div>
+</section>
     </div>
-      <!--  -->
+      <!-- gi -->
 
     <script src="./course_proj.js"></script>
 </body>

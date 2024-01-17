@@ -172,12 +172,12 @@
 const dayPresetButton = document.getElementById('day-preset-button');
 const monthPresetButton = document.getElementById('month-preset-button');
 
-dayPresetButton.addEventListener('click', () => setPresetDuration(7));
-monthPresetButton.addEventListener('click', () => setPresetDuration(30));
+dayPresetButton.addEventListener('click', () => setPresetDuration(6));
+monthPresetButton.addEventListener('click', () => setPresetDuration(29));
 
 function setPresetDuration(days) {
     // Use the selected start date, or default to the current date if none is selected
-    const startDate = startDateInput.value ? new Date(startDateInput.value) : new Date();
+    const startDate = startDateInput.value ? new Date(startDateInput.value) : new Date();//It first checks if there's a value in startDateInput (which seems to be an input field for the user to select a start date). If there is a value, it creates a new Date object using that value; if not, it defaults to the current date.
     const endDate = new Date(startDate);
 
     endDate.setDate(startDate.getDate() + days);
@@ -287,3 +287,125 @@ document.getElementById('searchButton').addEventListener('click', function(event
     }
 });
 
+document.getElementById('searchButton').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const countryInput = document.getElementById('countrySelect').value;
+    const yearInput = document.getElementById('yearSelect').value;
+    const resultsDiv = document.getElementById('results');
+
+    if (countryInput && yearInput) {
+        fetchCalendarificData('/holidays', { country: countryInput, year: yearInput })
+            .then(data => {
+                if (data && data.response && data.response.holidays) {
+                    resultsDiv.innerHTML = generateTable(data.response.holidays);
+                } else {
+                    resultsDiv.innerHTML = 'No holidays found for the selected country and year.';
+                }
+            });
+    } else {
+        resultsDiv.innerHTML = 'Please select a country and a year.';
+    }
+});
+
+let sortAscending = true;
+
+// Function to sort holidays
+function sortHolidays(holidays, ascending) {
+    return holidays.sort((a, b) => {
+        const dateA = new Date(a.date.iso);
+        const dateB = new Date(b.date.iso);
+        return ascending ? dateA - dateB : dateB - dateA;
+    });
+}
+
+// Function to generate the holidays table with a sort button
+function generateTable(holidays) {
+    let table = `<table><thead><tr><th>Date</th><th>Name of the Holiday</th></tr></thead><tbody>`;
+    holidays.forEach(holiday => {
+        table += `<tr><td>${holiday.date.iso}</td><td>${holiday.name}</td></tr>`;
+    });
+    table += '</tbody></table>';
+    return table;
+}
+
+document.getElementById('searchButton').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const countryInput = document.getElementById('countrySelect').value;
+    const yearInput = document.getElementById('yearSelect').value;
+    const resultsDiv = document.getElementById('results');
+
+    if (countryInput && yearInput) {
+        fetchCalendarificData('/holidays', { country: countryInput, year: yearInput })
+            .then(data => {
+                if (data && data.response && data.response.holidays) {
+                    // Sort the holidays initially in ascending order
+                    sortAscending = true;
+                    displaySortedHolidays(data.response.holidays);
+                } else {
+                    resultsDiv.innerHTML = 'No holidays found for the selected country and year.';
+                }
+            });
+    } else {
+        resultsDiv.innerHTML = 'Please select a country and a year.';
+    }
+});
+
+let currentHolidays = []; // Array to store the current holidays for sorting
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ... other initialization code ...
+
+    // Initialize event listener for the sort options dropdown
+    document.getElementById('sort-options').addEventListener('change', sortAndDisplayHolidays);
+});
+
+function fetchAndDisplayHolidays() {
+    const countryInput = document.getElementById('countrySelect').value;
+    const yearInput = document.getElementById('yearSelect').value;
+    const resultsDiv = document.getElementById('results');
+
+    if (countryInput && yearInput) {
+        fetchCalendarificData('/holidays', { country: countryInput, year: yearInput })
+            .then(data => {
+                if (data && data.response && data.response.holidays) {
+                    currentHolidays = data.response.holidays; // Store fetched holidays
+                    sortAndDisplayHolidays(); // Sort and display holidays
+                } else {
+                    resultsDiv.innerHTML = 'No holidays found for the selected country and year.';
+                }
+            });
+    } else {
+        resultsDiv.innerHTML = 'Please select a country and a year.';
+    }
+}
+
+function sortAndDisplayHolidays() {
+    const sortOption = document.getElementById('sort-options').value;
+    const sortedHolidays = sortHolidays(currentHolidays, sortOption);
+    displayHolidays(sortedHolidays);
+}
+
+function sortHolidays(holidays, sortOrder) {
+    return holidays.slice().sort((a, b) => {
+        const dateA = new Date(a.date.iso);
+        const dateB = new Date(b.date.iso);
+        return sortOrder === 'ascending' ? dateA - dateB : dateB - dateA;
+    });
+}
+
+function displayHolidays(holidays) {
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = generateTable(holidays);
+}
+
+// ... existing functions like generateTable remain the same ...
+
+document.getElementById('searchButton').addEventListener('click', fetchAndDisplayHolidays);
+
+
+
+
+
+ 
