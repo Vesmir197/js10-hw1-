@@ -56,7 +56,8 @@ margin-right: 10px;
 }
 .preset-buttons-container {
 display: flex;
-gap: 10px;
+justify-content: space-around;
+
     
 }
 .section-container {
@@ -68,6 +69,8 @@ gap: 10px;
 }
 .date-tab-culc-content {
     margin-top: 4%;
+    display: flex;
+    justify-content: space-between;
 
 }
 .calc-container {
@@ -113,11 +116,12 @@ gap: 10px;
 }
 .preset-button {
     margin-top: 10px;
-    height: 26px;
-    width: 54px;
+    height: 4vh;
+    width: 11vw;
     background-color: #bbeaec;
     border: none;
-    border-radius: 2px;
+    border-right: none;
+    border-radius: 0px;
     font-size: 10px;
     font-weight: 500;
     color: rgb(20, 20, 20);
@@ -177,6 +181,11 @@ input[type="radio"]:hover {
     background-color: #a6e4e6;
     border-radius: 1px;
     border: none;
+}
+.start-date, .end-date {
+    width: 15.5vw;
+    height: 4vh;
+    text-align: center;
 }
 .results-container {
     width: 50vw;
