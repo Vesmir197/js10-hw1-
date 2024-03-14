@@ -12,39 +12,62 @@
 <body>
     <div class="tab-container">
         <div class="tabs"> 
-            <button id="tab1" class="tab-btn">Date Range</button>
-            <button id="tab2" class="tab-btn">Holiday Info</button>
+            <button id="tab1" class="tab-btn">Find Dates</button>
+            <button id="tab2" class="tab-btn">Find Holidays</button>
         </div>
     
-        <div id="content-tab1" class="date-tab-content">
-            <!-- Date tab content -->
+    <div id="content-tab1" class="date-tab-content">
+           
+        <!-- Date tab content -->
+<div class="the-main-container">
+    <div class="main-find-dates-container">
+        <div class="date-tab-culc-content" >
+             <!--  <div class="find-days">Find Days</div> -->
             <input type="date" id="start-date"/>
             <input type="date" id="end-date"/>
-            <div id="duration-output" class="duration-output"></div>
+   
+        </div>
+        <div id="day-options-container" class="day-options-container">
+           <!-- <span>Show</span> -->                                                                          
+         <input type="radio" id="all-days" name="day-option" value="all" unchecked>
+         <label for="all-days" class="day-option-label">All Days</label><br>
+         <input type="radio" id="weekdays" name="day-option" value="weekdays">
+         <label for="weekdays" class="day-option-label">Weekdays</label><br>
+         <input type="radio" id="weekends" name="day-option" value="weekends">
+         <label for="weekends" class="day-option-label">Weekends</label>
+     </div>
+        <div class="preset-buttons-container">
+           <!--  <span class="preset-options">Preset options</span> -->
+             <button id="day-preset-button" class="preset-button">7 days</button>
+             <button id="week-preset-button" class="preset-button">14 days</button>
+             <button id="month-preset-button" class="preset-button">30 days</button>
+        </div>
 
-            <div id="date-unit-buttons">
-                <button id="days-button">Days</button>
-                <button id="hours-button">Hours</button>
-                <button id="minutes-button">Minutes</button>
-                <button id="seconds-button">Seconds</button>
-            </div>
-            
-            <div class="preset-buttons-container">
-                 <button id="day-preset-button" class="preset-button">Week(7 days)</button>
-                 <button id="month-preset-button" class="preset-button">Month(30 days)</button>
-            </div>
-                   
-
-            <div id="day-options-container" class="day-options-container">
-                <input type="radio" id="all-days" name="day-option" value="all" unchecked>
-                <label for="all-days" class="day-option-label">All Days</label><br>
-                <input type="radio" id="weekdays" name="day-option" value="weekdays">
-                <label for="weekdays" class="day-option-label">Weekdays</label><br>
-                <input type="radio" id="weekends" name="day-option" value="weekends">
-                <label for="weekends" class="day-option-label">Weekends</label>
-            </div>
+   
 
     
+            
+    </div>
+     </div>
+
+     <div id="duration-output" class="duration-output">Results</div>
+
+     <div class="calc-container">
+        <span class="calc">Calculate</span>
+        <div id="date-unit-buttons">
+            <button id="days-button" class="date-btn">Days</button>
+            <button id="hours-button" class="date-btn">Hours</button>
+            <button id="minutes-button" class="date-btn">Minutes</button>
+            <button id="seconds-button" class="date-btn">Seconds</button>
+        </div>
+   </div>
+       
+</div>
+  
+     
+
+        
+
 
         <!-- Last 10 Calculations Table -->
     <div id="results-container" class="results-container">
