@@ -7,8 +7,13 @@ body {
     height: 100vh;
     margin: 0 auto;
     background-color: darkslategrey;
+    font-family: sans-serif;
+    color: white;
 }
-
+.tab-container {
+    width: 90%;
+    margin-top: 40px; /* Adjust this value based on the height of your tabs */
+}
 .tab-btn {
 width: 90px;
 height: 50px;
@@ -18,42 +23,85 @@ border-color: aliceblue;
 border-radius: 2px;
 padding: 10px;
 font-family: sans-serif;
-}
-
-.section-container {
-    margin-top: 10px;
-}
-.tab-btn {
-    margin: 5px;
-}
-.tab-container {
-    text-align: center;
-}
-.tabs {
-    display: flex;
-    flex-direction: row; /* Change from column to row */
-    justify-content: center; /* Center tabs horizontally */
-    align-items: center; /* Align tabs vertically */
-    /* Add any additional styling as needed */
+margin-top: 20vh;
+margin-right: 10px;
 
 }
-.date-tab-content{
-    display: block;
 
-}
-.holiday-tab-content {
-    display: none;
-}
 .date-tab-content, .holiday-tab-content {
-    margin-top: 60px;
-    font-family: sans-serif;
+    margin-top: 5vh;
     color:  rgb(213, 240, 231);
     font-size: 18px;
 }
+ .date-tab-content {
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers the child elements horizontally */
+    align-items: start; /* Aligns items to the top */
+    flex-wrap: wrap; /* Allows items to wrap to the next line if necessary */
+    gap: 20px; 
+    width: 100%;
+ }
+.main-find-dates-container {
+    display: flex; /* This makes it a flex container */
+    flex-direction: column; /* This arranges the flex items (children) in a column */
+    align-items: center; /* This centers the children horizontally */
+    justify-content: start; /* This aligns the children to the start of the flex container */
+    gap: 20px; /* Optional: adds space between the children */
+}
+.date-tab-culc-content, .preset-buttons-container {
+    width: 100%; /* Ensure child elements take full width of their parent */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Align items to the start (left) */
+}
+.preset-buttons-container {
+display: flex;
+gap: 10px;
+    
+}
+.section-container {
+    margin-top: 30vh;
+}
+.tabs {
+    margin-left: 5% ;
+    display: flex;
+}
+.date-tab-culc-content {
+    margin-top: 4%;
+
+}
+.calc-container {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    
+}
+.calc, .find-days {
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 14px;
+    color: white;
+    
+}
+
+.holiday-tab-content {
+    display: none;
+}
+
 .duration-output {
      color:  rgb(213, 240, 231);
      font-family: sans-serif;
      font-size: 14px;
+     border: solid #96beb8;
+     width: 20vw;
+     height: 15vh;
+     margin-top: 4vh;
+     border-radius: 3px;
+     display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    text-align: center;
+  
 }
 
 .unit-button {
@@ -65,22 +113,28 @@ font-family: sans-serif;
 }
 .preset-button {
     margin-top: 10px;
-    height: 40px;
-    width: 60px;
-    background-color: rgb(71, 146, 121);
+    height: 26px;
+    width: 54px;
+    background-color: #bbeaec;
     border: none;
     border-radius: 2px;
     font-size: 10px;
+    font-weight: 500;
     color: rgb(20, 20, 20);
 }
-.day-options-container {
-    margin-top: 10px;
-    display: flex;
-    align-items: center; /* Align items vertically in the center */
-    justify-content: flex-start; /* Align items horizontally to the start */
-    gap: 10px; /* Optional: adds space between items */
-    flex-wrap: wrap; /* Optional: allows items to wrap to the next line if the container is too narrow */
+.date-btn {
+
+    height: 30px;
+    width: 64px;
+    background-color: rgb(105, 175, 152);
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(20, 20, 20);
 }
+
+
 .day-option-label {
     color:rgb(188, 232, 217) ;
     font-family: sans-serif;
@@ -98,10 +152,10 @@ input[type="radio"] {
     appearance: none; /* Or -webkit-appearance: none; for some browsers */
     -moz-appearance: none;
     -webkit-appearance: none;
-    width: 20px; /* Custom width */
-    height: 20px; /* Custom height */
-    background-color: #f2f2f2; /* Background color */
-    border: 2px solid #d1d1d1; /* Border color */
+    width: 24px; /* Custom width */
+    height: 24px; /* Custom height */
+    background-color: #bbeaec; /* Background color */
+    border: 2px solid#bbeaec; /* Border color */
     position: relative; /* Position relative for the inner square */
     cursor: pointer; /* Optional: to change cursor on hover */
     border-radius: 1px;
@@ -110,23 +164,25 @@ input[type="radio"] {
 input[type="radio"]:checked::after {
     content: "";
     position: absolute;
-    top: 5px; /* Adjust these values based on the size */
-    left: 5px;
+    top: 7px; /* Adjust these values based on the size */
+    left: 7px;
     width: 10px; /* Adjust size of the inner square */
     height: 10px;
-    background-color: rgb(78, 80, 79); /* Inner square color */
+    background-color: #bbeaec; /* Inner square color */
     cursor: pointer; /* Optional: to change cursor on hover */
     border-radius: 1px;
     border: none;
 }
 input[type="radio"]:hover {
-    background-color: #e7e7e7;
+    background-color: #a6e4e6;
     border-radius: 1px;
     border: none;
 }
 .results-container {
-    margin-top: 10px;
+    width: 50vw;
+   margin-left: 20%;
 }
+
 .results-table {
     border-radius: 2px;
 }
@@ -139,31 +195,7 @@ input[type="radio"]:hover {
     font-family: sans-serif;
     font-weight: 600;
 }
-.preset-buttons-container {
-    /* ... other styles ... */
-    display: flex; /* Use flexbox */
-    flex-direction: row; /* Arrange children in a row */
-    justify-content: center; /* Center children horizontally */
-    gap: 10px; /* Space between items */
-    margin-top: 0px;
-}
 
-.tabs {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-    border-bottom: none;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1000;
-}
-
-/* Margin top for the first content to ensure it doesn't get hidden behind the tabs */
-.tab-container {
-    margin-top: 60px; /* Adjust this value based on the height of your tabs */
-}
 
 /* Scrollable container for holiday results */
 #results {
@@ -260,7 +292,3 @@ input[type="radio"]:hover {
     flex-wrap: wrap; /* Allows items to wrap to the next line if the container is too narrow */
     /* ... other existing styles ... */
 }
-
-
-
-
